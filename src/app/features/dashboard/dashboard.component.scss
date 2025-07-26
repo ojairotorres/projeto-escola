@@ -1,0 +1,107 @@
+/* dashboard.component.scss */
+
+:host {
+  display: flex; /* Usamos flexbox para organizar o header e o container principal */
+  flex-direction: column; /* Organiza os filhos verticalmente: header em cima, container embaixo */
+  height: 100vh; /* Garante que o componente ocupe a altura total da viewport */
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 64px; /* Altura padrão para headers do Material Design */
+  background-color: #3f51b5; /* Cor primária do Material Design */
+  color: white;
+  flex-shrink: 0; /* Impede que o header encolha se houver pouco espaço */
+  width: 100%; /* Garante que o header ocupe toda a largura horizontal */
+  box-sizing: border-box; /* Inclui padding na largura total */
+  z-index: 2; /* Garante que o header fique acima de outros elementos se houver sobreposição */
+  position: relative; /* Necessário para z-index funcionar corretamente */
+}
+
+.title {
+  font-size: 1.25rem; /* Tamanho da fonte para o título */
+  font-weight: 500; /* Peso da fonte */
+  margin-left: 16px; /* Espaçamento após o botão de menu */
+}
+
+.spacer {
+  flex: 1; /* Empurra o botão "Sair" para a direita, ocupando o espaço restante */
+}
+
+/* Container que abrigará o Sidenav e o Conteúdo Principal */
+.sidenav-container-full {
+  flex: 1; /* Ocupa todo o espaço vertical restante após o header */
+  height: calc(100vh - 64px); /* Calcula a altura restante (100% da tela - altura do header) */
+  /* Removei 'display: flex' daqui, pois mat-sidenav-container já é flex por padrão */
+}
+
+/* Estilos para o Sidenav (barra lateral) */
+.sidenav {
+  background-color: #1a1a2e; /* Cor escura, ideal para menus laterais */
+  color: white;
+  width: 250px; /* Largura padrão quando expandido */
+  transition: width 0.3s ease; /* Transição suave para a largura */
+  overflow-x: hidden; /* Oculta a barra de rolagem horizontal */
+  flex-shrink: 0; /* Garante que o sidenav não encolha */
+  padding-top: 16px; /* Espaçamento no topo do menu */
+  border-radius: 0 !important;
+}
+
+.sidenav.collapsed {
+  width: 60px; /* Largura quando colapsado */
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  /* Altura removida, pois o sidenav já tem altura definida e o conteúdo se ajusta */
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px; /* Espaçamento entre ícone e label */
+  padding: 12px;
+  color: white;
+  text-align: left;
+  white-space: nowrap; /* Impede que o texto quebre linha */
+  border-radius: 2px; /* Pequeno arredondamento nas bordas */
+  margin: 0 8px 4px; /* Espaçamento entre os itens do menu */
+  /* Ajuste no ::ng-deep se necessário, mas geralmente não é recomendado
+     se puder evitar. Para Angular Material, as classes são globais. */
+}
+
+.menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Fundo sutil ao passar o mouse */
+}
+
+.label {
+  white-space: nowrap;
+  overflow: hidden; /* Oculta o texto que excede o limite */
+  text-overflow: ellipsis; /* Adiciona "..." se o texto for cortado */
+  transition: opacity 0.3s ease; /* Transição para o texto ao expandir/colapsar */
+}
+
+/* Esconde o label quando o sidenav está colapsado */
+.sidenav.collapsed .label {
+  opacity: 0;
+  width: 0;
+}
+
+/* Estilos para o conteúdo principal */
+.main-content {
+  flex: 1; /* Ocupa todo o espaço horizontal restante */
+  display: flex; /* Para que o 'content' interno possa ter rolagem */
+  flex-direction: column;
+  overflow: hidden; /* Oculta qualquer transbordamento da área do main-content */
+}
+
+.content {
+  flex: 1; /* Ocupa todo o espaço vertical restante dentro de main-content */
+  overflow-y: auto; /* Permite rolagem vertical apenas no conteúdo */
+  padding: 16px;
+  background-color: #f5f5f5; /* Cor de fundo suave para o conteúdo */
+}
