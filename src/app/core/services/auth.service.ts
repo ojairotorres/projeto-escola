@@ -24,4 +24,7 @@ export class AuthService {
     const data = localStorage.getItem(this.STORAGE_KEY);
     return data ? JSON.parse(data) : null;
   }
+  isLoggedIn(): boolean {
+  return !!this.getUser(); // retorna true se houver um usuário salvo no localStorage
+}
 }

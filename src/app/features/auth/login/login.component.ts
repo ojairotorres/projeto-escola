@@ -37,14 +37,19 @@ export class LoginComponent {
   onSubmit(): void {
   if (this.form.valid) {
     const { email, senha } = this.form.value;
+    console.log('Tentando login com:', email, senha); // 👈 log útil
+
     const sucesso = this.authService.login(email, senha);
+    console.log('Login bem-sucedido?', sucesso); // 👈 log útil
 
     if (sucesso) {
-      this.router.navigate(['/dashboard']); // vamos criar essa rota depois
+      this.router.navigate(['/dashboard']);
     } else {
       alert('Credenciais inválidas');
     }
   } else {
     this.form.markAllAsTouched();
   }
-  }}
+}
+
+}
