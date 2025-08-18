@@ -1,6 +1,6 @@
-// dashboard.component.ts
+// dashboard.component.ts (Verifique se está exatamente assim)
 
-import { Component, ViewChild, AfterViewInit } from '@angular/core'; // Adicionado AfterViewInit
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,41 +25,53 @@ import { AuthService } from '../../core/services/auth.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements AfterViewInit { // Implementando AfterViewInit
-  @ViewChild('sidenav') sidenav!: MatSidenav; // Referência ao MatSidenav no template
+export class DashboardComponent implements AfterViewInit {
+  @ViewChild('sidenav') sidenav!: MatSidenav;
 
-  isCollapsed = false; // Estado para controlar se o sidenav está colapsado
+  isCollapsed = false;
 
   menuItems = [
-    { label: 'Alunos', icon: 'school', link: '/alunos' },
-    { label: 'Professores', icon: 'person', link: '/professores' },
-    { label: 'Modalidades', icon: 'sports_kabaddi', link: '/modalidades' },
-    { label: 'Esportes', icon: 'fitness_center', link: '/esportes' },
-    { label: 'Recebimentos', icon: 'attach_money', link: '/recebimentos' },
-    { label: 'Gastos', icon: 'money_off', link: '/gastos' },
-  ];
+    { label: 'Alunos', icon: 'school', link: '/dashboard/alunos' },
+    { label: 'Professores', icon: 'person', link: '/dashboard/professores' },
+    {
+  label: 'Modalidades',
+  icon: 'sports_kabaddi',
+  link: null,
+  children: [
+    { label: 'Visualizar', link: 'modalidades/visualizar' },
+    { label: 'Cadastrar', link: 'modalidades/cadastrar' }
+  ],
+  isSubmenuOpen: false
+},
+    { label: 'Esportes', icon: 'fitness_center', link: '/dashboard/esportes' },
+    { label: 'Recebimentos', icon: 'attach_money', link: '/dashboard/recebimentos' },
+    { label: 'Gastos', icon: 'money_off', link: '/dashboard/gastos' },
+];
 
   constructor(
     private authService: AuthService,
     private router: Router
   ) {}
 
-  // AfterViewInit é um Lifecycle Hook que garante que o ViewChild 'sidenav' esteja disponível
-  ngAfterViewInit() {
-    // Aqui você pode adicionar lógica que precisa do sidenav já renderizado, se necessário.
-    // Por exemplo, se quisesse abrir ou fechar programaticamente ao iniciar.
-    // this.sidenav.open(); // Exemplo
-  }
+  ngAfterViewInit() { }
 
-  // Função para alternar o estado de colapso do sidenav
   toggleSidenav(): void {
-    // Inverte o valor de isCollapsed. O CSS reagirá a essa mudança.
     this.isCollapsed = !this.isCollapsed;
-    // Se você quisesse usar o método toggle nativo do MatSidenav (não necessário para o colapso de largura)
-    // this.sidenav.toggle();
   }
 
-  // Função para fazer logout, mantida como está
+  toggleSubmenu(item: any): void {
+    if (item.children) {
+      // Fecha todos os outros submenus
+      this.menuItems.forEach(menuItem => {
+        if (menuItem !== item && menuItem.isSubmenuOpen) {
+          menuItem.isSubmenuOpen = false;
+        }
+      });
+      // Alterna o submenu clicado
+      item.isSubmenuOpen = !item.isSubmenuOpen;
+    }
+  }
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/']);

@@ -1,0 +1,26 @@
+[33mcommit efcab75697bb2fa11e05a1416810da73ad0989dc[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Merge: c2e4cba e5f0dc4
+Author: Jairo Torres <105895393+ojairotorres@users.noreply.github.com>
+Date:   Sat Jul 26 11:55:53 2025 -0300
+
+    Merge pull request #2 from ojairotorres/feat/auth-guard
+    
+    validação de rota, criação e ajustes para dashboard
+
+[33mcommit e5f0dc408dbb1064ac473a5e0d71e845dcd699f4[m[33m ([m[1;31morigin/feat/auth-guard[m[33m, [m[1;32mfeat/auth-guard[m[33m)[m
+Author: Jairo Torres <jairotorres0408@gmail.com>
+Date:   Sat Jul 26 11:54:17 2025 -0300
+
+    validação de rota, criação e ajustes para dashboard
+
+[33mcommit c2e4cbad56e2f6bc6198416d187185fbf47781e6[m[33m ([m[1;31morigin/feat/login-fake-auth[m[33m, [m[1;32mfeat/login-fake-auth[m[33m)[m
+Author: Jairo Torres <jairotorres0408@gmail.com>
+Date:   Sat Jul 19 11:50:42 2025 -0300
+
+    feat(auth): Tela de login com fake-authentication
+
+[33mcommit 77a06d2cd83f3073d2fcfe4c5eeae85f588fac05[m
+Author: Jairo Torres <jairotorres0408@gmail.com>
+Date:   Sat Jul 19 09:48:48 2025 -0300
+
+    feat: estrutura inicial do Projeto Escola com Angular 19 standalone e Material

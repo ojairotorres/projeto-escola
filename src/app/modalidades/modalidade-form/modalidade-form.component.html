@@ -1,0 +1,93 @@
+<div class="modalidade-form-container">
+  <h2>Cadastrar Nova Modalidade</h2>
+
+  <form [formGroup]="modalidadeForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="nome" required>
+      <mat-error *ngIf="modalidadeForm.get('nome')?.hasError('required')">
+        Nome é obrigatório.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descrição</mat-label>
+      <textarea matInput formControlName="descricao" rows="3"></textarea>
+    </mat-form-field>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Valor da Mensalidade</mat-label>
+        <input matInput type="number" formControlName="valorMensalidade" required>
+        <mat-error *ngIf="modalidadeForm.get('valorMensalidade')?.hasError('required')">
+          Valor é obrigatório.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Duração da Aula (min)</mat-label>
+        <input matInput type="number" formControlName="duracaoAulaMinutos" required>
+        <mat-error *ngIf="modalidadeForm.get('duracaoAulaMinutos')?.hasError('required')">
+          Duração é obrigatória.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Idade Mínima</mat-label>
+        <input matInput type="number" formControlName="idadeMinima" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Idade Máxima</mat-label>
+        <input matInput type="number" formControlName="idadeMaxima" required>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Gênero Permitido</mat-label>
+        <mat-select formControlName="generoPermitido" required>
+          <mat-option *ngFor="let genero of generos" [value]="genero">
+            {{ genero | titlecase }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="modalidadeForm.get('generoPermitido')?.hasError('required')">
+          Gênero é obrigatório.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Nível</mat-label>
+        <mat-select formControlName="nivel" required>
+          <mat-option *ngFor="let nivel of niveis" [value]="nivel">
+            {{ nivel | titlecase }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="modalidadeForm.get('nivel')?.hasError('required')">
+          Nível é obrigatório.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Capacidade Máx. de Alunos</mat-label>
+      <input matInput type="number" formControlName="capacidadeMaximaAlunos" required>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="modalidadeAtiva" class="modalidade-ativa">
+      Modalidade Ativa
+    </mat-checkbox>
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="modalidadeForm.invalid">
+        Cadastrar
+      </button>
+      <button mat-button type="button" (click)="modalidadeForm.reset()">
+        Limpar
+      </button>
+    </div>
+  </form>
+</div>
